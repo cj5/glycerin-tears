@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+@import 'variables';
+@import 'utilities';
+
+body {
+  font-family: $font-main;
+  margin: 0;
+}
+
+p, a, li {
+  line-height: 1.75;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+}
+
+header {
+  border-bottom: 1px solid blue;
+}
