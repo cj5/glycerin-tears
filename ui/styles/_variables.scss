@@ -1,0 +1,44 @@
+$font-main: Avenir, 'Montserrat', sans-serif;
+
+$color-text: #333;
+$color-1: #7dbfc4;
+$color-2: #f47621;
+$color-3: #f8e0ba;
+$color-4: #563b2a;
+$teal: $color-1;
+$orange: $color-2;
+$cream: $color-3;
+$brown: $color-4;
+$teal-dk: #30676e;
+$cream-dk: darken($cream, 5%);
+
+$site-mxw: 1440px;
+$header-ht: 95px;
+$header-ht-short: 70px;
+$social-icon-ht-d: 35px;
+$social-icon-ht-m: 25px;
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// BREAKPOINTS
+$bp-xl: 1200px;
+$bp-lg: 992px;
+$bp-md: 768px;
+$bp-sm: 576px;
+$bp-xs: 420px;
+$bp-xxs: 370px;
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// MEDIA QUERIES
+$mxw-xl: '(max-width: #{$bp-xl - 1})';
+$mxw-lg: '(max-width: #{$bp-lg - 1})';
+$mxw-md: '(max-width: #{$bp-md - 1})';
+$mxw-sm: '(max-width: #{$bp-sm - 1})';
+$mxw-xs: '(max-width: #{$bp-xs - 1})';
+$mxw-xxs: '(max-width: #{$bp-xxs - 1})';
+
+$mnw-xxs: '(min-width: #{$bp-xxs})';
+$mnw-xs: '(min-width: #{$bp-xs})';
+$mnw-sm: '(min-width: #{$bp-sm})';
+$mnw-md: '(min-width: #{$bp-md})';
+$mnw-lg: '(min-width: #{$bp-lg})';
+$mnw-xl: '(min-width: #{$bp-xl})';

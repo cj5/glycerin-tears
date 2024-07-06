@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
+    "prod": "npx nuxi generate",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
@@ -11,6 +12,7 @@
   },
   "dependencies": {
     "nuxt": "^3.10.3",
+    "nuxt-gtag": "^2.0.6",
     "vue": "^3.4.19",
     "yarn": "^1.22.21"
   },

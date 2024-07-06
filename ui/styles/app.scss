@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import 'variables';
+@import 'mixins';
+@import 'utilities';
+
+html,
+body {
+  overflow-x: hidden;
+}
+body {
+  font-family: $font-main;
+  font-size: 18px;
+  font-weight: 500;
+  color: $color-text;
+  color: $teal-dk;
+  background-color: #222;
+  margin: 0;
+}
+
+main {
+  max-width: $site-mxw;
+  margin: 0 auto;
+}
+
+p, a, li {
+  line-height: 1.5;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  margin: 0;
+}
+
+img {
+  width: 100%;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.heading {
+  font-weight: 900;
+  font-size: 32px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.btn {
+  background-color: $teal;
+  padding: 14px 40px;
+  border: none;
+  border-radius: 30px;
+  color: $teal-dk;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 600;
+  min-width: 200px;
+  cursor: pointer;
+  @include transition;
+  &:hover {
+    background-color: darken($teal, 10%);
+  }
+}
+
+.anchor {
+  display: block;
+  transform: translateY(-($header-ht-short + 20px));
+}
+
+.input-wrap {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+label {
+  margin-bottom: 5px;
+}
+input[type='text'],
+input[type='email'],
+input[type='phone'] {
+  height: 32px;
+  padding: 4px 12px;
+}
+textarea {
+  padding: 10px 12px;
+}
+input[type='text'],
+input[type='email'],
+input[type='phone'],
+textarea {
+  font-family: $font-main;
+  font-size: 18px;
+  border: 2px solid $teal;
+  border-radius: 10px;
+  &:focus {
+    border: 2px solid $orange;
+    outline: $orange;
+  }
+}
+
+.hero {
+  video {
+    width: 100%;
+  }
+  svg.icon {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    padding: 5px;
+    background-color: rgba(#000, 0.4);
+  }
+}
+
+footer {
+  .social a,
+  .social .logo {
+    width: 50px !important;
+    height: 50px !important;
+  }
+}
