@@ -5,7 +5,7 @@
       <h2 class="heading mt-4 mb-5">Bio</h2>
       <div class="fz-22" style="max-width: 815px; margin: 0 auto;">
 
-        <p v-if="data" v-for="(p, index) of data[0].bio_paragraph" :key="index" v-html="p"></p>
+        <p v-if="data" v-for="(p, index) of data[0].paragraph" :key="index" v-html="p"></p>
 
         <!-- <p>It’s a glorious, sunny summer afternoon, Saturday, 1975. You’re at the beach with a bright yellow transistor radio next to your ear, and it’s pumping out fun, danceable hits.</p>
         <p>That’s the sound of Glycerin Tears.</p>
@@ -18,7 +18,8 @@
 </template>
 
 <script setup>
-const { data, pending, error, refresh, clear } = await useFetch('https://admin.glycerintears.com/wp-json/wp/v2/bio')
+// const { data, pending, error, refresh, clear } = await useFetch('https://admin.glycerintears.com/wp-json/wp/v2/bio')
+const { data, pending, error, refresh, clear } = await useFetch('https://glycerintears-admin.chrisstack.co/wp-json/wp/v2/bio')
 </script>
 
 <style lang="scss" scoped>

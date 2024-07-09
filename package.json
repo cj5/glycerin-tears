@@ -17,6 +17,7 @@
     "yarn": "^1.22.21"
   },
   "devDependencies": {
+    "dayjs": "^1.11.11",
     "sass": "^1.71.1"
   }
 }
