@@ -3,28 +3,28 @@
     <div class="container">
       <div class="header-wrap">
         <div class="logo-wrap flex">
-          <a href="#" class="flex" aria-label="Go to the top of the page">
+          <a href="#" @click="onNavClick('main')" @keydown.Enter="onNavClick('main')" class="flex" aria-label="Go to the top of the page">
             <img src="/images/logo_vertical.png" alt="Glycerin Tears logo">
           </a>
         </div>
         <nav ref="navEl">
           <ul class="nav-1">
             <li>
-              <a href="#bio" @click="closeMobileNav" @keydown.Enter="closeMobileNav">Bio</a>
+              <a href="#bio" @click="onNavClick('#bio')" @keydown.Enter="onNavClick('#bio')">Bio</a>
             </li>
             <li>
-              <a href="#shows" @click="closeMobileNav" @keydown.Enter="closeMobileNav">Shows</a>
+              <a href="#shows" @click="onNavClick('#shows')" @keydown.Enter="onNavClick('#shows')">Shows</a>
             </li>
             <li>
-              <a href="#video" @click="closeMobileNav" @keydown.Enter="closeMobileNav">Video</a>
+              <a href="#video" @click="onNavClick('#video')" @keydown.Enter="onNavClick('#video')">Video</a>
             </li>
           </ul>
           <ul class="nav-2">
             <li>
-              <a href="#songs" @click="closeMobileNav" @keydown.Enter="closeMobileNav">Songs</a>
+              <a href="#songs" @click="onNavClick('#songs')" @keydown.Enter="onNavClick('#songs')">Songs</a>
             </li>
             <li>
-              <a href="#contact" @click="closeMobileNav" @keydown.Enter="closeMobileNav">Contact</a>
+              <a href="#contact" @click="onNavClick('#contact')" @keydown.Enter="onNavClick('#contact')">Contact</a>
             </li>
             <li class="social desktop">
               <Social />
@@ -50,6 +50,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import Social from '../components/Social.vue'
+import { q, smoothScroll } from '../utilities'
 
 const headerClass = ref('')
 const navEl = ref(null)
@@ -60,6 +61,11 @@ function openMobileNav() {
 
 function closeMobileNav() {
   navEl.value.classList.remove('open')
+}
+
+function onNavClick(target) {
+  closeMobileNav()
+  smoothScroll(q(target), 70)
 }
 
 onMounted(() => {
@@ -89,7 +95,6 @@ header {
   max-width: $site-mxw;
   top: 0;
   background-color: $teal;
-  // box-shadow: 0 0 10px #333;
   z-index: 99;
   @include transition;
 
@@ -207,7 +212,7 @@ header {
     .close-mobile-nav {
       display: block;
       position: absolute;
-      top: 2px;
+      top: -2px;
       left: 30px;
       padding: 0;
       color: #fff;
@@ -226,7 +231,9 @@ header {
       @include transition;
 
       &.open {
+        position: fixed;
         left: 0;
+        z-index: 9;
       }
 
       .nav-1,
@@ -249,18 +256,24 @@ header {
       .social.desktop {
         display: none;
       }
-
     }
 
     // nav
     .open-mobile-nav {
+      transform: translateY(-3px);
       font-size: 40px;
       color: #fff;
       padding: 0;
       cursor: pointer;
+    }
+
+    .close-mobile-nav,
+    .open-mobile-nav {
+      opacity: 1;
+      transition: 0.1s all ease-in-out;
 
       &:hover {
-        color: $teal;
+        opacity: 0.6;
       }
     }
   }

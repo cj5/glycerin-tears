@@ -3,7 +3,7 @@
     <div class="container w-100">
       <div class="footer-wrap">
         <div class="logo-wrap flex jcc">
-          <a href="#" class="flex jcc" aria-label="Go to the top of the page">
+          <a href="#" @click="onNavClick('main')" @keydown.Enter="onNavClick('main')" class="flex jcc" aria-label="Go to the top of the page">
             <img src="/images/logo_horizontal.png" alt="Glycerin Tears logo">
           </a>
         </div>
@@ -17,6 +17,11 @@
 
 <script setup>
 import Social from '../components/Social.vue'
+import { q, smoothScroll } from '../utilities'
+
+function onNavClick(target) {
+  smoothScroll(q(target), 95)
+}
 </script>
 
 <style lang="scss" scoped>

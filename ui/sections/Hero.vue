@@ -85,23 +85,55 @@ function onMuteUnmute() {
 <style lang="scss" scoped>
 @import '/ui/styles/variables';
 
-.video-controls {
-  display: flex;
-  position: absolute;
-  bottom: 30px;
-  right: 30px;
-
-  button {
-    padding: 0 12px 0 0;
-
-    &:last-of-type {
-      padding: 0;
-    }
+.hero {
+  video {
+    width: 100%;
   }
 
-  @media #{$mxw-sm} {
-    bottom: 20px;
-    right: 20px;
+  .video-controls {
+    display: flex;
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+
+    svg.icon {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+    }
+
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      margin: 0 12px 0 0;
+      background-color: rgba(#000, 0.4);
+
+      .icon-play {
+        position: relative;
+        left: 1px;
+      }
+
+      &:hover {
+        svg {
+          fill: $teal;
+          transition: 0.1s all ease-in-out;
+        }
+      }
+
+      &:last-of-type {
+        margin: 0;
+      }
+    }
+
+    @media #{$mxw-sm} {
+      bottom: 20px;
+      right: 20px;
+    }
   }
 }
 </style>

@@ -25,8 +25,16 @@ useHead({
   title: 'Glycerin Tears | 70s Pop-Rock Cover Band',
   meta: [
     { name: 'description', content: 'The Glycerin Tears cover the best pop-rock songs recorded between 1970 – 1979, taking you along on a timeless journey through the golden age of music.' },
+    { name: 'msapplication-TileColor', content: '#f47621' },
+    { name: 'theme-color', content: '#ffffff' },
   ],
   link: [
+    { rel: 'icon', href: '/favicon.ico' },
+    { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicons/favicon-16x16.png' },
+    { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicons/favicon-32x32.png' },
+    { rel: 'apple-touch-icon', sizes: '180x180', href: '/favicons/apple-touch-icon.png' },
+    { rel: 'manifest', href: '/site.webmanifest' },
+    { rel: 'mask-icon', href: '/favicons/safari-pinned-tab.svg' },
     { rel: 'preload', href: '/images/hero-placeholder.jpg', as: 'image' },
     { rel: 'prefetch', href: '/images/hero-placeholder.jpg' },
   ],
