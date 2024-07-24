@@ -13,6 +13,10 @@ export function q(target) {
   return els;
 }
 
+export function getElementDistanceFromTop(el) {
+  return window.scrollY + el.getBoundingClientRect().top;
+}
+
 // https://pawelgrzybek.com/page-scroll-in-vanilla-javascript/
 export function smoothScroll(destination, headerOffset, duration = 200, easing = 'easeInOutQuad', callback) {
   const easings = {

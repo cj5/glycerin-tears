@@ -4,27 +4,38 @@
     <div class="container">
       <h2 class="heading mt-4 mb-4">Song List</h2>
     </div>
-    <div class="section-wrap flex p-rel" style="overflow: hidden;">
+    <div class="section-wrap flex p-rel" ref="sectionWrapEl" style="overflow: hidden;">
       <img src="/images/pages_d.png" class="desktop" alt="">
       <img src="/images/pages_m.png" class="mobile" alt="">
       <div class="songs-list p-abs w-100 h-100 mt-8">
         <div class="container">
-          <div class="pages desktop flex w-100">
-            <ul class="left-page">
-              <li v-for="(song, index) in leftPageSongs" :key="index" v-html="song"></li>
-            </ul>
-            <ul class="right-page">
-              <li v-for="(song, index) in rightPageSongs" :key="index" v-html="song"></li>
-            </ul>
-          </div>
-          <div class="pages mobile">
-            <ul class="">
-              <li v-for="(song, index) in allSongs" :key="index" v-html="song"></li>
-            </ul>
+          <div class="pages-wrap p-rel">
+            <div @scroll="onScroll" class="pages desktop flex w-100" ref="pagesDesktopEl">
+              <ul class="left-page">
+                <li v-for="(song, index) in leftPageSongs" :key="index" v-html="song"></li>
+              </ul>
+              <ul class="right-page">
+                <li v-for="(song, index) in rightPageSongs" :key="index" v-html="song"></li>
+              </ul>
+            </div>
+            <div @scroll="onScroll" class="pages mobile" ref="pagesMobileEl">
+              <ul class="">
+                <li v-for="(song, index) in allSongs" :key="index" v-html="song"></li>
+              </ul>
+            </div>
+
+            <div class="scroll-up hide" ref="scrollUpEl" aria-label="Scroll Up">
+              <span class="arrow">⇑</span>
+              <span class="text">Scroll</span>
+            </div>
+            <div class="scroll-down" ref="scrollDownEl" aria-label="Scroll Down">
+              <span class="text">Scroll</span>
+              <span class="arrow">⇓</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </div> <!-- .section-wrap -->
     <div class="flex">
       <img src="/images/performing-porch.jpg" alt="">
     </div>
@@ -36,6 +47,15 @@ import { ref, onMounted } from 'vue'
 
 const leftPageSongs = ref([])
 const rightPageSongs = ref([])
+const sectionWrapEl = ref(null)
+const pagesDesktopEl = ref(null)
+const pagesMobileEl = ref(null)
+const scrollDownEl = ref(null)
+const scrollUpEl = ref(null)
+const elHeight = ref(null)
+const elScrollTop = ref(null)
+const elScrollHeight = ref(null)
+const elDifference = ref(null)
 
 const songs = [
   'Crazy On You — Heart',
@@ -78,9 +98,52 @@ const songs = [
 
 const allSongs = structuredClone(songs)
 
+function setScrollValues() {
+  if (window.innerWidth < 1050) {
+    elHeight.value = pagesMobileEl.value.offsetHeight
+    elScrollTop.value = pagesMobileEl.value.scrollTop
+    elScrollHeight.value = pagesMobileEl.value.scrollHeight
+    elDifference.value = (pagesMobileEl.value.offsetHeight + 80) - sectionWrapEl.value.offsetHeight
+  } else {
+    elHeight.value = pagesDesktopEl.value.offsetHeight
+    elScrollTop.value = pagesDesktopEl.value.scrollTop
+    elScrollHeight.value = pagesDesktopEl.value.scrollHeight
+    elDifference.value = (pagesDesktopEl.value.offsetHeight + 80) - sectionWrapEl.value.offsetHeight
+  }
+
+  if (elHeight.value === elScrollHeight.value) {
+    scrollUpEl.value.classList.add('hide')
+    scrollDownEl.value.classList.add('hide')
+  }
+
+  scrollDownEl.value.style.bottom = 30 + elDifference.value + 'px';
+}
+
+function onScroll() {
+  setScrollValues()
+
+  if (elScrollTop.value + elHeight.value === elScrollHeight.value) {
+    scrollUpEl.value.classList.remove('hide')
+    scrollDownEl.value.classList.add('hide')
+  } else if (elScrollTop.value === 0) {
+    scrollDownEl.value.classList.remove('hide')
+    scrollUpEl.value.classList.add('hide')
+  } else {
+    scrollDownEl.value.classList.remove('hide')
+    scrollUpEl.value.classList.remove('hide')
+  }
+}
+
 onMounted(() => {
   leftPageSongs.value = songs.splice(0, Math.ceil(songs.length / 2))
   rightPageSongs.value = songs
+
+  document.addEventListener('DOMContentLoaded', () => {
+    setScrollValues()
+  })
+  window.addEventListener('resize', () => {
+    setScrollValues()
+  })
 })
 </script>
 
@@ -153,6 +216,38 @@ onMounted(() => {
       font-size: 18px;
     }
   }
+}
+
+.scroll-down,
+.scroll-up {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  background-color: rgba(#fff, 0.5);
+  padding: 5px;
+  border-radius: 5px;
+
+  >* {
+    line-height: 1.1;
+  }
+
+  .arrow {
+    font-size: 20px;
+  }
+
+  .text {
+    font-size: 14px;
+  }
+}
+
+.scroll-down {
+  bottom: 30px;
+}
+
+.scroll-up {
+  top: 0;
 }
 
 .pages {
