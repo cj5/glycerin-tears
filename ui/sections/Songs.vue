@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 
 const leftPageSongs = ref([])
 const rightPageSongs = ref([])
@@ -98,7 +98,7 @@ const songs = [
 
 const allSongs = structuredClone(songs)
 
-function setScrollValues() {
+function onScroll() {
   if (window.innerWidth < 1050) {
     elHeight.value = pagesMobileEl.value.offsetHeight
     elScrollTop.value = pagesMobileEl.value.scrollTop
@@ -117,10 +117,8 @@ function setScrollValues() {
   }
 
   scrollDownEl.value.style.bottom = 30 + elDifference.value + 'px';
-}
 
-function onScroll() {
-  setScrollValues()
+  // console.log(elHeight.value, elScrollTop.value, elScrollHeight.value);
 
   if (elScrollTop.value + elHeight.value === elScrollHeight.value) {
     scrollUpEl.value.classList.remove('hide')
@@ -138,11 +136,12 @@ onMounted(() => {
   leftPageSongs.value = songs.splice(0, Math.ceil(songs.length / 2))
   rightPageSongs.value = songs
 
-  document.addEventListener('DOMContentLoaded', () => {
-    setScrollValues()
+  nextTick(() => {
+    onScroll()
   })
+
   window.addEventListener('resize', () => {
-    setScrollValues()
+    onScroll()
   })
 })
 </script>
@@ -229,16 +228,28 @@ onMounted(() => {
   padding: 5px;
   border-radius: 5px;
 
+  @media #{$mxw-sm} {
+    right: -20px;
+  }
+
   >* {
     line-height: 1.1;
   }
 
   .arrow {
     font-size: 20px;
+
+    @media #{$mxw-xs} {
+      font-size: 16px;
+    }
   }
 
   .text {
     font-size: 14px;
+
+    @media #{$mxw-xs} {
+      font-size: 12px;
+    }
   }
 }
 

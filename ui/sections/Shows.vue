@@ -95,6 +95,12 @@ const shows = ref(data.value)
 
 shows.value.sort((a, b) => new Date(a.show_date) - new Date(b.show_date))
 
+const removePastShows = shows.value.filter((date) => {
+  let isDateUpcoming = dayjs(date.show_date).diff(dayjs(), 'day')
+  return isDateUpcoming >= 0 ? isDateUpcoming = true : isDateUpcoming = false
+})
+
+shows.value = removePastShows
 </script>
 
 <style lang="scss" scoped>
